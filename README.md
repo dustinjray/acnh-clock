@@ -8,6 +8,8 @@ This clock utilizes the ACNH API which can be found at: http://acnhapi.com
 
 The music icon in the corner uses the same API to play a random background music for the current hour from the game (so Sunny, Rainy, or Snowy). The music is off by default.
 
+The working clock may be viewed at: http://dustinjray.github.io/acnh-clock
+
 The background images change based on time of day and screen width. The photos come from various photographers on unsplash and the credits may be found below:
 
 Morning:
