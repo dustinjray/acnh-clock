@@ -1,20 +1,21 @@
 const QUERY_API = "https://acnhapi.com/v1/"
+
 const MODAL = document.querySelector("#modal");
 const MODAL_CONTENT = document.querySelector("#modal-content");
-const MODAL_OVERLAY = document.querySelector(".modal-overlay")
+const MODAL_OVERLAY = document.querySelector(".modal-overlay");
+
 const HOURS = document.querySelector("#hours");
 const MINUTES = document.querySelector("#minutes");
 const MAIN = document.querySelector("main");
-const FISH_BUTTON = document.querySelector("#fish-button");
-const BUG_BUTTON = document.querySelector("#bug-button");
-const SEA_BUTTON = document.querySelector("#sea-button");
 const TIME = document.querySelector("#time");
+
+const AUDIO = document.querySelector("audio");
+
 const CLOSE_BUTTON = document.querySelector("#close-button");
 const MUSIC_BUTTON = document.querySelector("#music-button");
-const AUDIO = document.querySelector("audio");
 const NORTHERN_BUTTON = document.querySelector("#northern");
 const SOUTHERN_BUTTON = document.querySelector("#southern");
-
+const CREATURE_BUTTONS = document.querySelectorAll(".creatures");
 
 let militaryHour = 0;
 let month = 0;
@@ -27,7 +28,6 @@ initializeSite();
 function initializeSite() {
     updateTime();
     setInterval(updateTime, 1000);
-    document.querySelector("#music-image").src = "imgs/music-note.svg";
 }
 
 function updateTime() {
@@ -37,18 +37,14 @@ function updateTime() {
     if (militaryHour > 12) {
         HOURS.innerText = militaryHour - 12;
     } else {
-        if (militaryHour == 0) {
+        if (militaryHour === 0) {
             HOURS.innerText = 12;
         } else {
             HOURS.innerText = militaryHour;
         }
     }
-    document.querySelector(".am-pm").innerText = militaryHour > 12 ? "PM" : "AM";
-    if (date.getMinutes() < 10) {
-        MINUTES.innerText = ("0" + date.getMinutes());
-    } else {
-        MINUTES.innerText = date.getMinutes();
-    }
+    document.querySelector(".am-pm").innerText = militaryHour >= 12 ? "PM" : "AM";
+    MINUTES.innerText = date.getMinutes().toString().padStart(2, "0");
     updateBackgroundClass();
 }
 
@@ -112,11 +108,9 @@ function getCreatures(query) {
         })
         .then(data => {
             let creatureArray = Object.keys(data).map(key => data[key]);
-            console.log("Data:", data);
             creatureArray = filterCreatures(creatureArray);
             createCards(creatureArray);
         }).catch(error => {
-        console.log("Something went wrong", error);
     });
 }
 
@@ -125,12 +119,11 @@ function createCards(array) {
     for (let i = 0; i < array.length; i++) {
         const clone = template.content.cloneNode(true);
         const image = clone.querySelector('img');
-        // console.log(array[0]);
         image.src = array[i].icon_uri;
         const name = clone.querySelector("#name");
         name.innerText = array[i].name["name-USen"];
         const middle = clone.querySelector("#middle");
-        if (array[i].availability.location == undefined) {
+        if (array[i].availability.location === undefined) {
             middle.innerText = `Speed: ${array[i].speed}`;
         } else {
             middle.innerText = array[i].availability.location;
@@ -212,7 +205,6 @@ function pickMusicId() {
             break;
         case 10:
             musicId = getRandomNumber(31, 34);
-            console.log(musicId);
             break;
         case 11:
             musicId = getRandomNumber(34, 37);
@@ -257,26 +249,18 @@ function pickMusicId() {
     return musicId;
 }
 
+
+
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max-min) + min);
 }
 
-FISH_BUTTON.addEventListener("click", () => {
-    getCreatures("fish");
-    MODAL.classList.toggle("closed");
-    MODAL_OVERLAY.classList.toggle("closed");
-});
-
-BUG_BUTTON.addEventListener("click", () => {
-    getCreatures("bugs");
-    MODAL.classList.toggle("closed");
-    MODAL_OVERLAY.classList.toggle("closed");
-});
-
-SEA_BUTTON.addEventListener("click", () => {
-    getCreatures("sea");
-    MODAL.classList.toggle("closed");
-    MODAL_OVERLAY.classList.toggle("closed");
+CREATURE_BUTTONS.forEach(btn => {
+    btn.addEventListener('click', () => {
+        getCreatures(btn.id);
+        MODAL.classList.toggle("closed");
+        MODAL_OVERLAY.classList.toggle("closed");
+    });
 });
 
 MUSIC_BUTTON.addEventListener("click", () => {
@@ -290,7 +274,7 @@ CLOSE_BUTTON.addEventListener("click", () => {
 });
 
 NORTHERN_BUTTON.addEventListener("click", function() {
-    if (hemisphere != "northern") {
+    if (hemisphere !== "northern") {
         this.classList.toggle("selected");
         hemisphere = "northern";
         SOUTHERN_BUTTON.classList.toggle("selected");
@@ -298,7 +282,7 @@ NORTHERN_BUTTON.addEventListener("click", function() {
 });
 
 SOUTHERN_BUTTON.addEventListener("click", function() {
-    if (hemisphere != "southern") {
+    if (hemisphere !== "southern") {
         this.classList.toggle("selected");
         hemisphere = "southern";
         NORTHERN_BUTTON.classList.toggle("selected");

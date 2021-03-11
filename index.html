@@ -11,29 +11,29 @@
 </head>
 <body>
 <audio></audio>
-<main class="morning">
-    <div class="button" id="music-button">
-        <img id="music-image" alt="">
+<main class="morning flex align-center">
+    <div class="button flex align-center" id="music-button">
+        <img id="music-image" src="./imgs/music-note.svg" alt="">
     </div>
     <div class="time-div">
         <h1 class="time" id="time"><span id="hours">12</span>:<span id="minutes">43</span><span
                 class="am-pm">AM</span></h1>
     </div>
-    <div class="hemisphere-buttons">
-        <div class="hemisphere-button selected" id="northern"><p>Northern</p></div>
-        <div class="hemisphere-button" id="southern"><p>Southern</p></div>
+    <div class="hemisphere-buttons flex align-center">
+        <div class="hemisphere-button flex align-center selected" id="northern"><p>Northern</p></div>
+        <div class="hemisphere-button flex align-center" id="southern"><p>Southern</p></div>
     </div>
 
 
-    <div class="button-container">
-        <div class="image-button button" id="fish-button">
-            <img id="fish" src="imgs/fish.svg" alt="">
+    <div class="button-container flex">
+        <div class="image-button button flex align-center creatures" id="fish">
+            <img id="fish-img" src="imgs/fish.svg" alt="">
         </div>
-        <div class="image-button button" id="bug-button">
-            <img id="bug" src="imgs/bug.svg" alt="">
+        <div class="image-button button flex align-center creatures" id="bugs">
+            <img id="bug-img" src="imgs/bug.svg" alt="">
         </div>
-        <div class="image-button button" id="sea-button">
-            <img id="sea" src="imgs/sea.svg" alt="">
+        <div class="image-button button flex align-center creatures" id="sea">
+            <img id="sea-img" src="imgs/sea.svg" alt="">
         </div>
     </div>
 </main>
@@ -57,7 +57,7 @@
 </template>
 
 <div class="modal closed" id="modal">
-    <div class="button" id="close-button">
+    <div class="button flex align-center" id="close-button">
         <img id ="x" src="imgs/close.svg" alt="">
     </div>
     <div class="modal-content" id="modal-content">
