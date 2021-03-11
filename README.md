@@ -1,7 +1,7 @@
 # Animal Crossing: New Horizons - Bugs, Fish, and Sea Creature Clock
 
 [The Clock](https://dustinjray.github.io/acnh-clock)
-##Inspiration
+## Inspiration
 
 I saw a recommendation to create a clock as an early JavaScript project, but that seemed boring. I decided to expand upon that suggestion by making it into a tool for a game I like to play. 
 
